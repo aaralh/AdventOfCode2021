@@ -25,5 +25,7 @@
 (defn solve
   "I don't do a whole lot ... yet."
   [& args]
+  (println "Day1")
   (println (calculateDepthing data))
-  (println (calculateDepthingWithWindow data)))
+  (println (calculateDepthingWithWindow data))
+  (println ""))
