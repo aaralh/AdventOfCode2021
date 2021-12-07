@@ -40,7 +40,7 @@
     (str/split-lines  (slurp "./src/advent_of_code/days/day2/input.txt")))
 
 (defn solve
-  "I don't do a whole lot ... yet."
+  "https://adventofcode.com/2021/day/2"
   [& args]
   (println "Day2")
 

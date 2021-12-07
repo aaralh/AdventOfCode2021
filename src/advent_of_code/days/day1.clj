@@ -23,7 +23,7 @@
       depthing)))
 
 (defn solve
-  "I don't do a whole lot ... yet."
+  "https://adventofcode.com/2021/day/1"
   [& args]
   (println "Day1")
   (println (calculateDepthing data))
