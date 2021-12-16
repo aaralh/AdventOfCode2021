@@ -91,8 +91,35 @@
         ))))
 
 (defn getLastWinningBoard
-  [boards])
+  [boards]
+  (loop [boards boards
+         numbers (next numbers)
+         usedNumbers (list (first numbers))
+         winner nil
+         currentBoardIndex 0]
+    (if (not= numbers nil)
+      (do
+        (def isBingo
+          (hasBoardBingo (nth boards currentBoardIndex) usedNumbers))
+        
+        (if (not (and isBingo (= 1 (count boards))))
+          (recur
+           (if isBingo (remove #(= (nth boards currentBoardIndex) %) boards) boards)
+           (if (and (= currentBoardIndex (- (count boards) 1)) (not isBingo)) (next numbers) numbers)
+           (if (and (= currentBoardIndex (- (count boards) 1)) (not isBingo)) (conj usedNumbers (first numbers)) usedNumbers)
+           (if isBingo (nth boards currentBoardIndex) winner)
+           (if
+            (not isBingo) (if (< currentBoardIndex (- (count boards) 1))
+                            (inc currentBoardIndex) 0) (if (< currentBoardIndex (- (count boards) 1))
+                                                         currentBoardIndex 0)))
+          (list (last boards) usedNumbers (first usedNumbers))))
+      )))
 
+
+(defn calculateResult
+  [board usedNumbers currentNumber]
+  (*  currentNumber(reduce +
+   (remove (set usedNumbers) (map parse-int (flatten (getRows board)))))))
 
 
 (defn solve
@@ -100,22 +127,8 @@
   [& args]
   (println "Day4")
   (println "")
-  (def result (getFirstWinningBoard boards))
-  (println result)
-  (println (flatten(getRows (first result))))
-  (println "")
-  (println (type (first (flatten(getRows (first result))))) (type (first (second result))))
-  (println (set (map parse-int(flatten (getRows (first result))))))
-  (println (remove (set (second result)) (map parse-int (flatten (getRows (first result))))))
-  (println (*  32 (reduce +
-   (remove (set (second result)) (map parse-int (flatten (getRows (first result))))))))
-
-  (println (parse-int (nth result 2)))
-  (println (reduce +
-   (remove (set (second result)) (map parse-int (flatten (getRows (first result)))))))
-"  (def test 
-    (list 50 98 65 14 47))
-  (println (hasBoardBingo (first boards) test))"
+  (println (apply calculateResult (getFirstWinningBoard boards)))
+  (println (apply calculateResult (getLastWinningBoard boards)))
 
   (println ""))
 
