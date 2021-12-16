@@ -109,11 +109,7 @@
   "https://adventofcode.com/2021/day/3"
   [& args]
   (println "Day3")
-
-  [1 1 1 0 1 1 0 1 0 1 0 1]
-  [0 0 0 1 0 0 1 0 1 0 1 0]
-
-  (println data)
+  
   (println (getMostUsedBits data))
   (println (getLeastUsedBits data))
   (println (get-oxygen-rating data))

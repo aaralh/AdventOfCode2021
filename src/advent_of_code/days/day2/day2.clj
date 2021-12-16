@@ -12,7 +12,6 @@
            x 0]
       (if-let [item (first data)]
         (do
-         (println item) 
           (recur
          (next data)
          (if (= (first (clojure.string/split item #"\s+")) "down") (+ y (parse-int (second (clojure.string/split item #"\s+")))) (if (= (first (clojure.string/split item #"\s+")) "up") (- y (parse-int (second (clojure.string/split item #"\s+")))) y))
@@ -28,7 +27,6 @@
            x 0]
       (if-let [item (first data)]
         (do
-         (println item) 
           (recur
            (next data)
            (if (= (first (clojure.string/split item #"\s+")) "down") (+ aim (parse-int (second (clojure.string/split item #"\s+")))) (if (= (first (clojure.string/split item #"\s+")) "up") (- aim (parse-int (second (clojure.string/split item #"\s+")))) aim))
@@ -44,7 +42,6 @@
   [& args]
   (println "Day2")
 
-  (println data)
   (println (calculatePosition data))
   (println (calculatePositionWithAim data))
   (println ""))
